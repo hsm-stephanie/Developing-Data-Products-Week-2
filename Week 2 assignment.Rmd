@@ -1,0 +1,37 @@
+```yaml
+---
+title: "Week 2-R Markdown and Leaflet"
+author: "hsm-stephanie"
+date: "`r format(Sys.Date())`"
+output: html_document:
+        keep_md:true
+---
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(rCharts)
+```
+
+## Use Leaflet to create an interactive map
+
+This R Markdown document will show a map created with Leaflet in rCharts package. The date of creation is also included.
+
+```{r Leaftlet, echo=FALSE}
+map1<-Leaflet$new()
+map1$setView(c(51.9,-0.09),zoom=13)
+#map1$tileLayer(provider = 'Stamen.Toner') #
+map1$marker(c(51.9,-0.09),bindPopup="<p><b>this is the place</p>")
+#map1$circle(c(51.9,-0.09))#,radius=50,bindPopup="<p>this is a circle</p>") #no circle showed
+#map1$show() #has the marker
+map1$save('map1.html',standalone=TRUE) 
+#cdn=TRUE-link js/css assets from an online cdn, map1.html 2kb
+#standalone=TRUE saved to local but no marker is shown, map1.html, 600kb
+```
+<iframe src="map1.html"  width=100% height=600></frame>
+
+no comma before height=
+Not immediately shown. Open the knitted html the map will show.
+
+map1$show('iframe',cdn=TRUE) #doesn't work?error: opts_current not found
